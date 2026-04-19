@@ -1,8 +1,14 @@
 const express = require('express')
 const app = express()
 
+const PORT = process.env.PORT || 8080
+
 app.use(express.static('dist'))
 
-app.listen(8080, () => {
-  console.log('server started on port 8080')
+app.get('/version', (req, res) => {
+  res.send('1')
+})
+
+app.listen(PORT, () => {
+  console.log(`server started on port ${PORT}`)
 })
