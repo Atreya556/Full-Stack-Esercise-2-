@@ -1,3 +1,4 @@
+const js = require('@eslint/js')
 const react = require('eslint-plugin-react')
 const jest = require('eslint-plugin-jest')
 const globals = require('globals')
@@ -5,15 +6,15 @@ const globals = require('globals')
 module.exports = [
   {
     ignores: [
-  'webpack.config.js',
-  'eslint.config.js',
-  '.eslintrc.js',
-  'node_modules/**',
-  'dist/**',
-  'e2e-tests/**',
-  'jest.setup.js',
-  'playwright.config.js'
-]
+      'webpack.config.js',
+      'eslint.config.js',
+      '.eslintrc.js',
+      'node_modules/**',
+      'dist/**',
+      'e2e-tests/**',
+      'jest.setup.js',
+      'playwright.config.js'
+    ]
   },
   js.configs.recommended,
   {
