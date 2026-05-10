@@ -2,10 +2,10 @@ const express = require('express')
 const path = require('path')
 const app = express()
 
-// Use PORT from environment or default to 5001
+// Use PORT from environment or default
 const PORT = process.env.PORT || 5001
 
-// Serve static files from 'dist' (Webpack build output)
+// Serve static files from build output
 app.use(express.static('dist'))
 
 // Version endpoint
@@ -13,31 +13,29 @@ app.get('/version', (req, res) => {
   res.send('1')
 })
 
-// Health check endpoint (REQUIRED for Exercise 12)
+// Health check endpoint (required for deployment exercises)
 app.get('/health', (req, res) => {
   res.send('ok')
 })
 
-// Test endpoint to verify deployment
+// Test endpoint
 app.get('/test', (req, res) => {
-  res.json({ 
+  res.json({
     message: 'Deployment successful!',
     timestamp: new Date().toISOString(),
     status: 'running'
   })
 })
 
-// Handle React Router - send all other requests to index.html
-// FIXED: Changed from '*' to '/*' for Express 5 compatibility
-app.get('/*', (req, res) => {
-  res.sendFile(path.resolve('dist', 'index.html'))
+// Handle React Router fallback route (IMPORTANT FIX)
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
 })
 
 // Start server
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`)
-  console.log(`Test endpoints:`)
-  console.log(`  - Health: http://localhost:${PORT}/health`)
-  console.log(`  - Version: http://localhost:${PORT}/version`)
-  console.log(`  - Test: http://localhost:${PORT}/test`)
+  console.log(`Health: http://localhost:${PORT}/health`)
+  console.log(`Version: http://localhost:${PORT}/version`)
+  console.log(`Test: http://localhost:${PORT}/test`)
 })
