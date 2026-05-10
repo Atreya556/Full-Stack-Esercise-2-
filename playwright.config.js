@@ -2,14 +2,18 @@ const { defineConfig } = require('@playwright/test')
 
 module.exports = defineConfig({
   testDir: './e2e-tests',
+
+  timeout: 60000,
+  retries: 2,
+
   use: {
     baseURL: 'http://localhost:8080',
   },
+
   webServer: {
     command: 'npm run start-prod',
     url: 'http://localhost:8080',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
   },
-  timeout: 60000,
 })
