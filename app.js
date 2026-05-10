@@ -28,7 +28,8 @@ app.get('/test', (req, res) => {
 })
 
 // Handle React Router - send all other requests to index.html
-app.get('*', (req, res) => {
+// FIXED: Changed from '*' to '/*' for Express 5 compatibility
+app.get('/*', (req, res) => {
   res.sendFile(path.resolve('dist', 'index.html'))
 })
 
